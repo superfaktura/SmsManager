@@ -1,5 +1,5 @@
 {
-    "name": "superfaktura/smsmanger",
+    "name": "superfaktura/smsmanager",
     "description": "Module for API communication with SMSmanager.cz",
     "type": "library",
     "license": "MIT",
