@@ -39,8 +39,8 @@ final class PhoneNumberUtils {
 						$localeNumber = '420';
 						break;
 				}
-				$number = preg_replace('/^0?9/', $localeNumber, $number);
-			} else if(preg_match('/^(?:00|\+)\d{11}$/', $number)) { // Starts with 00xxx xxx xxx xxx or +xxx xxx xxx xxx
+				$number = preg_replace('/^(0|9)/', $localeNumber, $number);
+			} else if(preg_match('/^(?:00|\+)?\d{12}$/', $number)) { // Starts with 00xxx xxx xxx xxx or +xxx xxx xxx xxx
 				/** @var string $localeNumber */
 				$localeNumber = '';
 				switch($locale) {
@@ -63,6 +63,6 @@ final class PhoneNumberUtils {
 	 * @return bool
 	 */
 	public static function validatePhoneNumber($number) {
-		return preg_match('/^(?:00|\+)?\d+/', $number);
+		return preg_match('/^(?:00|\+)?\d{12}$/', $number);
 	}
 }

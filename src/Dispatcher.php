@@ -11,9 +11,6 @@ use Po1nt\SmsManager\Exceptions\ServerException;
  */
 class Dispatcher implements IDispatcher {
 	
-	const TEST_USER = 'user@user.com';
-	const TEST_PASSHASH = 'da39a3ee5e6b4b0d3255bfef95601890afd80709';
-	
 	/** @var string $username */
 	protected $username;
 	
@@ -126,7 +123,14 @@ class Dispatcher implements IDispatcher {
 		curl_setopt($ch, CURLOPT_URL, $this->getApiEndpoint());
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_POST, 1);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(array('XMLDATA' => $xml->asXML())));
+		
+		/** @var string[] $params */
+		$params = [
+			'XMLDATA' => $xml->asXML(),
+			'sandbox' => 'true'
+		];
+		
+		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
 		
 		try {
 			$output = curl_exec($ch);

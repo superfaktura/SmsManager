@@ -7,15 +7,14 @@ use Po1nt\SmsManager\Exceptions\ServerException;
 
 class DispatcherStub extends Dispatcher {
 	
+	public $testMode = true;
+	
 	public function generateXml($message) {
 		return parent::generateXml($message);
 	}
 }
 
 class DispatcherTest extends TestCase {
-	
-	const API_USER = 'info@superfaktura.cz';
-	const API_PASS = 'HesloTiNeřeknuZmrde!';
 	
 	function createMessage() {
 		$recipient = new Recipient('0900123456', 'sk');
@@ -28,7 +27,7 @@ class DispatcherTest extends TestCase {
 	}
 	
 	function createDispatcher() {
-		$dispatcher = new DispatcherStub('test', 'test');
+		$dispatcher = new DispatcherStub($GLOBALS['test_api_params'][0], $GLOBALS['test_api_params'][1]);
 		
 		return $dispatcher;
 	}
@@ -50,7 +49,7 @@ class DispatcherTest extends TestCase {
 	function testWrongServerPassword() {
 		$this->expectException(ServerException::class);
 		
-		$dispatcher = new DispatcherStub('WRONG_USER', 'WRONG_PASS');
+		$dispatcher = new DispatcherStub($GLOBALS['test_api_params'][0], $GLOBALS['test_api_params'][1]);
 		$message = new Message('Test message text');
 		$message->addRecipient(new Recipient('+420 123 12 12 12'));
 		$message->addRecipient(new Recipient('+420 123 12 12 13'));
@@ -62,7 +61,7 @@ class DispatcherTest extends TestCase {
 	 * @depends testGenerateXmlIsValid
 	 */
 	function testSend() {
-		$dispatcher = new DispatcherStub(self::API_USER, self::API_PASS);
+		$dispatcher = new DispatcherStub($GLOBALS['test_api_params'][0], $GLOBALS['test_api_params'][1]);
 		$message = new Message('c==3');
 		$message->addRecipient(new Recipient('+421 902 796 000'));
 		$message->addRecipient(new Recipient('+421 940 133 565'));
