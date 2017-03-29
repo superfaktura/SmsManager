@@ -76,7 +76,7 @@ class Dispatcher implements IDispatcher {
 	 * @return \SimpleXmlElement
 	 * @throws InsufficientDataException
 	 */
-	protected function generateXml($message) {
+	public function generateXml($message) {
 		$xml = new \SimpleXMLElement('<RequestDocument />');
 		
 		$header = $xml->addChild('RequestHeader');

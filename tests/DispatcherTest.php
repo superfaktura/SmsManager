@@ -9,9 +9,6 @@ class DispatcherStub extends Dispatcher {
 	
 	public $testMode = true;
 	
-	public function generateXml($message) {
-		return parent::generateXml($message);
-	}
 }
 
 class DispatcherTest extends TestCase {
