@@ -20,5 +20,5 @@ interface IDispatcher {
 	
 	function getApiEndpoint();
 	
-	function send($message);
+	function send(IMessage $message);
 }

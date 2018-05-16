@@ -35,7 +35,7 @@ interface IMessage {
 	 *
 	 * @return void
 	 */
-	function addRecipient($recipient);
+	function addRecipient(IRecipient $recipient);
 	
 	/**
 	 * Removes recipient from recipients list
@@ -44,7 +44,7 @@ interface IMessage {
 	 *
 	 * @return true
 	 */
-	function removeRecipient($recipient);
+	function removeRecipient(IRecipient $recipient);
 	
 	/**
 	 * Returns all recipients
